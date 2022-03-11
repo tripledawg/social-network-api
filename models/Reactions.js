@@ -1,39 +1,41 @@
 const { Schema, model } = require('mongoose');
 
-// Schema to create a course model
-const thoughtsSchema = new Schema(
+// Schema to create a reaction
+//This will not be a model, but rather will be used as the `reaction` field's subdocument schema in the `Thought` model.
+const reactionSchema = new Schema(
   {
-    thoughtText: {
+    reactionId: {
+      //use Mongoose's ObjectId data type
+      //default value is set to new ObjectID
+    },
+    reactionBody: {
       type: String,
-      required: true,
+      required: true, 
+      max: 280,
     },
     username: {
-      type: String,
+      type: String, 
       required: true, 
     },
     createdAt: {
       type: Date,
       default: Date.now(),
+      // Use a getter method to format the timestamp on query
     },
     reactions: {
       type: String,
     },
-    __v: {
-      type: //???
-    }
-    reactionCount: {
-      type: //???
-    }
-    students: [
+    //not sure what to put here: [
       {
         type: Schema.Types.ObjectId,
-        ref: 'Student',
+        ref: 'Thought',
       },
     ],
   },
   {
     toJSON: {
       virtuals: true,
+      getter: true, 
     },
     id: true,
   }

@@ -1,32 +1,39 @@
 const { Schema, model } = require('mongoose');
 const friendSchema = require('./Friends');
+const thoughtsSchema = require('./Thoughts');
 
 // Schema to create Student model
 const userSchema = new Schema(
   {
-    id: {
-      type: //???
-      required: true,
-      max_length: 50,
-    },
-    userbame: {
+   
+    username: {
       type: String,
+      unique: true, 
       required: true,
-      max_length: 12,
+      // max_length: 12,
+      //trimmmed??
     },
     email: {
       type: String,
       required: true,
-      max_length: 25,
+      unique: true, 
+      //validation of email address using Mongoose's matching validation
     },
-    friends: [friendSchema],
+    thoughts: [thoughtsSchema],//array of thought ids
+    friends: [friendSchema],//???array of user ids of freinds
   },
   {
     toJSON: {
+      virtuals: true,
       getters: true,
     },
   }
 );
+
+// Creating a virtual property `friendCount`
+userSchema.virtual('friendCount').get(function () {
+  return this.friends.length;
+});
 
 const User = model('user', userSchema);
 

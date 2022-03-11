@@ -3,7 +3,7 @@ const { Schema, Types } = require('mongoose');
 const friendSchema = new Schema(
   {
     thoughts: {
-      id: //???
+      id: //??
       type: String; 
       required: false, 
       maxlength: 50,
