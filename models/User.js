@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 const friendSchema = require('./Friends');
-const thoughtsSchema = require('./Thoughts');
+const thoughtsSchema = require('./Thoughts').schema;
 
 // Schema to create Student model
 const userSchema = new Schema(
@@ -20,7 +20,7 @@ const userSchema = new Schema(
       //validation of email address using Mongoose's matching validation
     },
     thoughts: [thoughtsSchema],//array of thought ids
-    friends: [friendSchema],//???array of user ids of freinds
+    friends: [friendSchema]//???array of user ids of freinds
   },
   {
     toJSON: {

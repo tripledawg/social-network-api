@@ -51,7 +51,7 @@ module.exports = {
       });
   },
   // create a new user
-  createUserreq, res) {
+  createUser(req, res) {
     User.create(req.body)
       .then((user) => res.json(user))
       .catch((err) => res.status(500).json(err));
@@ -61,7 +61,7 @@ module.exports = {
     User.findOneAndRemove({ _id: req.params.userId })
       .then((user) =>
         !user
-          ? res.status(404).json({ message: 'No such user exists' })
+          ? res.status(404).json({ message: 'No such user exists' }) : res.status(200).json({message: 'Probably not right'})
       //     : Course.findOneAndUpdate(
       //         { students: req.params.studentId },
       //         { $pull: { students: req.params.studentId } },
@@ -75,7 +75,7 @@ module.exports = {
       //       })
       //     : res.json({ message: 'Student successfully deleted' })
       // ) What else needs to be erased? 
-      .catch((err) => {
+      ).catch((err) => {
         console.log(err);
         res.status(500).json(err);
       });

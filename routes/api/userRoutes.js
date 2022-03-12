@@ -23,9 +23,11 @@ router.route('/:userId/friend').post(addFriend);
 router.route('/:userId/friend/:friendId').delete(removeFriend);
 
 // /api/usesrs/:userId/thoughts
-router.route('/:userId/thoughts').post(addThought);
+// TODO: make addThought route
+// router.route('/:userId/thoughts').post(addThought);
 
 // /api/users/:userId/thoughts/:thoughtId
-router.route('/:userId/thoughts/:thoughtId').delete(removeThought);
+// TODO: make removeThought route
+// router.route('/:userId/thoughts/:thoughtId').delete(removeThought);
 
 module.exports = router;

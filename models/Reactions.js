@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const thoughtsSchema = require('./Thoughts').schema;
 
 // Schema to create a reaction
 //This will not be a model, but rather will be used as the `reaction` field's subdocument schema in the `Thought` model.
@@ -25,17 +26,17 @@ const reactionSchema = new Schema(
     reactions: {
       type: String,
     },
-    //not sure what to put here: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: 'Thought',
-      },
-    ],
+    // //not sure what to put here: [
+    //   {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'Thought',
+    //   },
+    // ],
   },
   {
     toJSON: {
       virtuals: true,
-      getter: true, 
+      getters: true, 
     },
     id: true,
   }
