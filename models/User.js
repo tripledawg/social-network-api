@@ -9,13 +9,13 @@ const userSchema = new Schema(
       type: String,
       unique: true, 
       required: true,
-      // max_length: 12,
-      //trimmmed??
+      trim: true
     },
     email: {
       type: String,
       required: true,
       unique: true, 
+      // { $match: { email: { $lte: 5 } } },???
       //validation of email address using Mongoose's matching validation
     },
     thoughts: [thoughtsSchema],//array of thought ids

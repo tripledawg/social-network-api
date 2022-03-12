@@ -35,7 +35,6 @@ module.exports = {
           ? res.status(404).json({ message: 'No reaction with that ID' })
           : Reactions.deleteMany({ _id: { $in: reaction.user } })
       )
-      // .then(() => res.json({ message: 'Friend and user deleted!' }))
-      // .catch((err) => res.status(500).json(err));
-  },
-  
+      .catch((err) => res.status(500).json(err));
+  }
+}

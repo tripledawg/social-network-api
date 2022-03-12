@@ -20,12 +20,6 @@ const reactionSchema = new Schema(
       // Use a getter method to format the timestamp on query
     },
   
-    // //not sure what to put here: [
-    //   {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'Thought',
-    //   },
-    // ],
   },
   {
     toJSON: {
