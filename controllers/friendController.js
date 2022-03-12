@@ -29,6 +29,7 @@ module.exports = {
   },
   // Delete a friend
   deleteFriend(req, res) {
+    console.log("test")
     Friend.findOneAndDelete({ _id: req.params.friendId })
       .then((friend) =>
         !friend

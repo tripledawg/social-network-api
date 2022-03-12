@@ -2,7 +2,11 @@
   ## ![screenshot](screenshot.png) 
   ![screenshot](screenshot2.png) 
    ![screenshot](screenshot3.png) 
+[Click here for a video demonstration](https://drive.google.com/file/d/1jUOqS1o_B56HCKi3RUBTsHq7wlz1M1SF/view)
 
+[Click here for part two](https://drive.google.com/file/d/1bzWAbrQsfQ67_7uICzghEdabLNI-P9uN/view)
+
+[Click here for a demo of startup](https://drive.google.com/file/d/1QhyfjEdB-VS0qafPw_lOliJMxzuDXXfG/view)
   ## Licensing:
   [![license](https://img.shields.io/badge/license-none-blue)](https://shields.io)
   ## Table of Contents: 
