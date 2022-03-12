@@ -26,12 +26,5 @@ router.route('/:userId').put(updateUser);
 // /api/users/:userId/friend/:friendId
 router.route('/:userId/friend/:friendId').delete(removeFriend);
 
-// /api/usesrs/:userId/thoughts
-// TODO: make addThought route
-// router.route('/:userId/thoughts').post(addThought);
-
-// /api/users/:userId/thoughts/:thoughtId
-// TODO: make removeThought route
-// router.route('/:userId/thoughts/:thoughtId').delete(removeThought);
 
 module.exports = router;
