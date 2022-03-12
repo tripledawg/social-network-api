@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const moment = require('moment');
 const reactionSchema = new Schema(
   {
     reactionBody: {
@@ -42,15 +43,14 @@ const thoughtsSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now(),
+      get: formatDate
       //* Use a getter method to format the timestamp on query
     },
     username: {
       type: String,
       required: true, 
     },
-   
     reactions: [reactionSchema],
-   
   },
   {
     toJSON: {

@@ -28,17 +28,17 @@ module.exports = {
       });
   },
   createReaction(req, res) {
-    Thoughts.findOneAndUpdate({_id: req.params.thoughtId}, {$push: {reaction:req.body}})
-      .then((reaction) => res.json(reaction))
+    Thoughts.findOneAndUpdate({_id: req.params.thoughtId}, {$push: {reactions: req.body}})
+      .then((thought) => res.json(thought))
       .catch((err) => {
         console.log(err);
         return res.status(500).json(err);
       });
   },
   deleteReaction(req, res) {
-    Thoughts.findOneAndUpdate({_id: req.params.thoughtId}, {$pull: {reaction:req.body}})
-    .then((reaction) =>
-      !reaction ? res.status(404).json({ message: 'No such reaction exists' }) : res.status(200).json({message: 'Reaction deleted!', reaction})
+    Thoughts.findOneAndUpdate({_id: req.params.thoughtId}, {$pull: {reactions: {_id: req.params.reactionId}}})
+    .then((thought) =>
+      !thought ? res.status(404).json({ message: 'No such reaction exists' }) : res.status(200).json({message: 'Reaction deleted!', thought})
     ).catch((err) => {
       console.log(err);
       res.status(500).json(err);
