@@ -8,10 +8,6 @@ const friendSchema = new Schema(
       maxlength: 50,
       minlength: 4,
     },
-    friendId: {
-      type: Schema.Types.ObjectId,
-      default: () => new Types.ObjectId(),
-    },
     username: {
       type: String,
       required: true,
@@ -23,8 +19,7 @@ const friendSchema = new Schema(
       type: String,
       required: true,
     },
-    friendcount: {
-    }
+    
   },
   {
     toJSON: {

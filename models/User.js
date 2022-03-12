@@ -5,7 +5,6 @@ const thoughtsSchema = require('./Thoughts').schema;
 // Schema to create Student model
 const userSchema = new Schema(
   {
-   
     username: {
       type: String,
       unique: true, 

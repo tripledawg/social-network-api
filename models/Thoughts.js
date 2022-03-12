@@ -35,8 +35,10 @@ const thoughtsSchema = new Schema(
 
 // Creating a virtual property `reactionCount`
 thoughtsSchema.virtual('reactionCount').get(function () {
-  return this.reactions.length;
+  if (this.reactions) return this.reactions.length;
+  else return 0;
 });
+
 
 const Thoughts = model('thoughts', thoughtsSchema);
 

@@ -1,10 +1,10 @@
-const { Thoughts, User } = require('../models');
+const { Thoughts, Reactions, User } = require('../models');
 
 module.exports = {
   // Get all thoughts
   getThoughts(req, res) {
     Thoughts.find()
-      .then((friend) => res.json(thought))
+      .then((thoughts) => res.json(thoughts))
       .catch((err) => res.status(500).json(err));
   },
   // Get a thought
@@ -26,5 +26,21 @@ module.exports = {
         console.log(err);
         return res.status(500).json(err);
       });
-  }
+  },
+  createReaction(req, res) {
+    Reactions.create(req.body)
+      .then((reaction) => res.json(reaction))
+      .catch((err) => {
+        console.log(err);
+        return res.status(500).json(err);
+      });
+  },
+  deleteReaction(req, res) {
+    Reactions.delete(req.body)
+      .then((reaction) => res.json(reaction))
+      .catch((err) => {
+        console.log(err);
+        return res.status(500).json(err);
+      });
+  },
 }

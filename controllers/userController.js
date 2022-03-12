@@ -1,30 +1,12 @@
 const { User, Friend } = require('../models');
 
-// // Aggregate function to get the number of students overall
-// const headCount = async () =>
-//   Student.aggregate()
-//     .count('studentCount')
-//     .then((numberOfStudents) => numberOfStudents);
-
-// // Aggregate function for getting the overall grade using $avg
-// const grade = async (studentId) =>
-//   Student.aggregate([
-//     {
-//       $unwind: '$assignments',
-//     },
-//     {
-//       $group: { _id: studentId, overallGrade: { $avg: '$assignments.score' } },
-//     },
-//   ]);
-
 module.exports = {
   // Get all users
   getUsers(req, res) {
     User.find()
       .then(async (users) => {
         const userObj = {
-          users,
-          headCount: await headCount(),//needed for this?
+          users
         };
         return res.json(userObj);
       })
@@ -42,7 +24,6 @@ module.exports = {
           ? res.status(404).json({ message: 'No user with that ID' })
           : res.json({
               user,
-              grade: await grade(req.params.userId),
             })
       )
       .catch((err) => {
@@ -60,34 +41,29 @@ module.exports = {
   deleteUser(req, res) {
     User.findOneAndRemove({ _id: req.params.userId })
       .then((user) =>
-        !user
-          ? res.status(404).json({ message: 'No such user exists' }) : res.status(200).json({message: 'Probably not right'})
-      //     : Course.findOneAndUpdate(
-      //         { students: req.params.studentId },
-      //         { $pull: { students: req.params.studentId } },
-      //         { new: true }
-      //       )
-      // )
-      // .then((course) =>
-      //   !course
-      //     ? res.status(404).json({
-      //         message: 'Student deleted, but no courses found',
-      //       })
-      //     : res.json({ message: 'Student successfully deleted' })
-      // ) What else needs to be erased? 
+        !user ? res.status(404).json({ message: 'No such user exists' }) : res.status(200).json({message: 'User deleted!', user})
       ).catch((err) => {
         console.log(err);
         res.status(500).json(err);
       });
   },
-
+//Update User
+updateUser(req, res) {
+  User.findOneAndUpdate({ _id: req.params.userId })
+  .then((user) =>
+        !user ? res.status(404).json({ message: 'No such user exists' }) : res.status(200).json({message: 'User updated!', user})
+      ).catch((err) => {
+        console.log(err);
+        res.status(500).json(err);
+      });
+  },
   // Add a friend to a user
   addFriend(req, res) {
     console.log('You are adding a friend');
     console.log(req.body);
     User.findOneAndUpdate(
       { _id: req.params.userId },
-      { $addToSet: { assignments: req.body } },
+      { $addToSet: { friends: req.body } },
       { runValidators: true, new: true }
     )
       .then((user) =>

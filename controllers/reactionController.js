@@ -19,7 +19,7 @@ module.exports = {
       .catch((err) => res.status(500).json(err));
   },
   // Create a reaction 
-  create(req, res) {
+  createReaction(req, res) {
     Reactions.create(req.body)
       .then((reaction) => res.json(reaction))
       .catch((err) => {

@@ -5,10 +5,6 @@ const thoughtsSchema = require('./Thoughts').schema;
 //This will not be a model, but rather will be used as the `reaction` field's subdocument schema in the `Thought` model.
 const reactionSchema = new Schema(
   {
-    reactionId: {
-      //use Mongoose's ObjectId data type
-      //default value is set to new ObjectID
-    },
     reactionBody: {
       type: String,
       required: true, 
@@ -23,9 +19,7 @@ const reactionSchema = new Schema(
       default: Date.now(),
       // Use a getter method to format the timestamp on query
     },
-    reactions: {
-      type: String,
-    },
+  
     // //not sure what to put here: [
     //   {
     //     type: Schema.Types.ObjectId,
@@ -42,6 +36,6 @@ const reactionSchema = new Schema(
   }
 );
 
-const Thoughts = model('thoughts', thoughtsSchema);
+const Reactions = model('reactions',reactionSchema);
 
-module.exports = Thoughts;
+module.exports = Reactions;
