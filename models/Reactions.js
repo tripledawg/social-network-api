@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const moment = require('moment');
 const thoughtsSchema = require('./Thoughts').schema;
 
 // Schema to create a reaction
@@ -17,7 +18,8 @@ const reactionSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now(),
-      // Use a getter method to format the timestamp on query
+      get: formatDate
+      // getter method to format the timestamp on query
     },
   
   },
@@ -26,10 +28,13 @@ const reactionSchema = new Schema(
       virtuals: true,
       getters: true, 
     },
-    id: true,
   }
 );
 
+function formatDate(createdAt){
+  moment(createdAt).format("MMM Do YY"); 
+}
 const Reactions = model('reactions',reactionSchema);
+
 
 module.exports = Reactions;

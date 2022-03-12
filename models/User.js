@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose');
-const friendSchema = require('./Friends');
+const friendSchema = require('./Friends').schema;
 const thoughtsSchema = require('./Thoughts').schema;
 
 // Schema to create Student model
@@ -15,6 +15,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
       unique: true, 
+      match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
       // { $match: { email: { $lte: 5 } } },???
       //validation of email address using Mongoose's matching validation
     },

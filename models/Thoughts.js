@@ -1,6 +1,36 @@
 const { Schema, model } = require('mongoose');
+const reactionSchema = new Schema(
+  {
+    reactionBody: {
+      type: String,
+      required: true, 
+      max: 280,
+    },
+    username: {
+      type: String, 
+      required: true, 
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now(),
+      get: formatDate
+      // getter method to format the timestamp on query
+    },
+  
+  },
+  {
+    toJSON: {
+      virtuals: true,
+      getters: true, 
+    },
+  }
+);
 
-// Schema to create a course model
+function formatDate(createdAt){
+  moment(createdAt).format("MMM Do YY"); 
+}
+
+// Schema to create a thought model
 const thoughtsSchema = new Schema(
   {
     thoughtText: {
@@ -19,9 +49,7 @@ const thoughtsSchema = new Schema(
       required: true, 
     },
    
-    reactions: {
-      //array of nested documents created with the `reactionSchema`
-    },
+    reactions: [reactionSchema],
    
   },
   {
@@ -39,7 +67,6 @@ thoughtsSchema.virtual('reactionCount').get(function () {
   else return 0;
 });
 
-
 const Thoughts = model('thoughts', thoughtsSchema);
-
 module.exports = Thoughts;
+

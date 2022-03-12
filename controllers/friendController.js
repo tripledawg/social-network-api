@@ -9,9 +9,9 @@ module.exports = {
   },
   // Get a friend
   getSingleFriend(req, res) {
-    Course.findOne({ _id: req.params.friendId })
+    Friend.findOne({ _id: req.params.friendId })
       .select('-__v')
-      .then((course) =>
+      .then((friend) =>
         !friend
           ? res.status(404).json({ message: 'No friend with that ID' })
           : res.json(friend)
@@ -21,7 +21,7 @@ module.exports = {
   // Add a friend  //can you use create???aren't you just referencing a friend that exists? 
   addFriend(req, res) {
     Friend.create(req.body)
-      .then((course) => res.json(friend))
+      .then((friend) => res.json(friend))
       .catch((err) => {
         console.log(err);
         return res.status(500).json(err);
@@ -29,7 +29,7 @@ module.exports = {
   },
   // Delete a friend
   deleteFriend(req, res) {
-    Course.findOneAndDelete({ _id: req.params.friendId })
+    Friend.findOneAndDelete({ _id: req.params.friendId })
       .then((friend) =>
         !friend
           ? res.status(404).json({ message: 'No friend with that ID' })
@@ -45,7 +45,7 @@ module.exports = {
       { $set: req.body },
       { runValidators: true, new: true }
     )
-      .then((course) =>
+      .then((friend) =>
         !friend
           ? res.status(404).json({ message: 'No friend with this id!' })
           : res.json(friend)

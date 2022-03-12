@@ -1,4 +1,4 @@
-const { Thoughts, Reactions, User } = require('../models');
+const { Thoughts } = require('../models');
 
 module.exports = {
   // Get all thoughts
@@ -28,7 +28,7 @@ module.exports = {
       });
   },
   createReaction(req, res) {
-    Reactions.create(req.body)
+    Thoughts.findOneAndUpdate({_id: req.params.thoughtId}, {$push: {reaction:req.body}})
       .then((reaction) => res.json(reaction))
       .catch((err) => {
         console.log(err);
@@ -36,11 +36,12 @@ module.exports = {
       });
   },
   deleteReaction(req, res) {
-    Reactions.delete(req.body)
-      .then((reaction) => res.json(reaction))
-      .catch((err) => {
-        console.log(err);
-        return res.status(500).json(err);
-      });
+    Thoughts.findOneAndUpdate({_id: req.params.thoughtId}, {$pull: {reaction:req.body}})
+    .then((reaction) =>
+      !reaction ? res.status(404).json({ message: 'No such reaction exists' }) : res.status(200).json({message: 'Reaction deleted!', reaction})
+    ).catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
   },
 }
