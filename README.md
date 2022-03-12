@@ -1,6 +1,8 @@
 # social-network-api
-  ## ![full size screenshot](screenshot.png) 
-  ![responsive screenshot](screenshot_responsive.png) 
+  ## ![screenshot](screenshot.png) 
+  ![screenshot](screenshot2.png) 
+   ![screenshot](screenshot3.png) 
+
   ## Licensing:
   [![license](https://img.shields.io/badge/license-none-blue)](https://shields.io)
   ## Table of Contents: 
@@ -11,7 +13,7 @@
   - [Questions](#questions)
 
   ## Description:
-  an API for a social network web application where users can share their thoughts, react to friends’ thoughts, and create a friend list. 
+  an API for a social network web application where users can share their thoughts, react to friends’ thoughts, and create a friend list
   ## Technology:
   Express.js, MogoDB database, Mongoose ODM, Moment.js, Insomnia to test routes
   ## Installation: 

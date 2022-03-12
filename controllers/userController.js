@@ -1,3 +1,4 @@
+const { callbackify } = require('util');
 const { User, Friend } = require('../models');
 
 module.exports = {
@@ -23,8 +24,8 @@ module.exports = {
         !user
           ? res.status(404).json({ message: 'No user with that ID' })
           : res.json({
-              user,
-            })
+            user,
+          })
       )
       .catch((err) => {
         console.log(err);
@@ -41,17 +42,17 @@ module.exports = {
   deleteUser(req, res) {
     User.findOneAndRemove({ _id: req.params.userId })
       .then((user) =>
-        !user ? res.status(404).json({ message: 'No such user exists' }) : res.status(200).json({message: 'User deleted!', user})
+        !user ? res.status(404).json({ message: 'No such user exists' }) : res.status(200).json({ message: 'User deleted!', user })
       ).catch((err) => {
         console.log(err);
         res.status(500).json(err);
       });
   },
-//Update User
-updateUser(req, res) {
-  User.findOneAndUpdate({ _id: req.params.userId }, {$set: req.body})
-  .then((user) =>
-        !user ? res.status(404).json({ message: 'No such user exists' }) : res.status(200).json({message: 'User updated!', user})
+  //Update User
+  updateUser(req, res) {
+    User.findOneAndUpdate({ _id: req.params.userId }, { $set: req.body })
+      .then((user) =>
+        !user ? res.status(404).json({ message: 'No such user exists' }) : res.status(200).json({ message: 'User updated!', user })
       ).catch((err) => {
         console.log(err);
         res.status(500).json(err);
@@ -69,8 +70,8 @@ updateUser(req, res) {
       .then((user) =>
         !user
           ? res
-              .status(404)
-              .json({ message: 'No user found with that ID :(' })
+            .status(404)
+            .json({ message: 'No user found with that ID :(' })
           : res.json(user)
       )
       .catch((err) => res.status(500).json(err));
@@ -79,16 +80,17 @@ updateUser(req, res) {
   removeFriend(req, res) {
     User.findOneAndUpdate(
       { _id: req.params.userId },
-      { $pull: { friends: { _id: req.params.friendId } } },
-      { runValidators: true, new: true }
+      { $pull: { friends: req.params.friendId } },
+      { new: true }
     )
       .then((user) =>
         !user
           ? res
-              .status(404)
-              .json({ message: 'No user found with that ID :(' })
+            .status(404)
+            .json({ message: 'No user found with that ID :(' })
           : res.json(user)
       )
       .catch((err) => res.status(500).json(err));
   },
+
 };
