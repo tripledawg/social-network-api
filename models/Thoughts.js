@@ -28,7 +28,7 @@ const reactionSchema = new Schema(
 );
 
 function formatDate(createdAt){
-  moment(createdAt).format("MMM Do YY"); 
+  return moment(createdAt).format("MMMM Do YYYY, h:mm:ss a"); 
 }
 
 // Schema to create a thought model
